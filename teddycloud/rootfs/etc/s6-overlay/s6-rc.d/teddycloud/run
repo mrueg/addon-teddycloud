@@ -1,0 +1,15 @@
+#!/command/with-contenv bashio
+# shellcheck shell=bash
+# ==============================================================================
+# Home Assistant Community Add-on: TeddyCloud
+# Runs TeddyCloud
+# ==============================================================================
+
+bashio::log.info "Starting TeddyCloud..."
+
+if [ -z "$(ls -A /config)" ]; then
+   bashio::log.info "Config is empty, copying default config"
+   cp -R /teddycloud/* /config;
+fi
+cd /config || exit
+exec /usr/local/bin/teddycloud

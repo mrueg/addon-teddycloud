@@ -1,0 +1,12 @@
+#!/command/with-contenv bashio
+# shellcheck shell=bash
+# ==============================================================================
+# Home Assistant Community Add-on: TeddyCloud
+# Runs the Nginx daemon
+# ==============================================================================
+
+# Wait for the TeddyCloud webinterface to become available
+bashio::net.wait_for 80 127.0.0.1 900
+
+bashio::log.info "Starting Nginx..."
+exec nginx
