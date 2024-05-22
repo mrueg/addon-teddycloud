@@ -28,7 +28,11 @@ server {
         sub_filter 'REACT_APP_TEDDYCLOUD_WEB_BASE:"/web"' 'REACT_APP_TEDDYCLOUD_WEB_BASE:"$http_x_ingress_path/web"';
         sub_filter 'PUBLIC_URL:"/web"' 'PUBLIC_URL:"$http_x_ingress_path/web"';
         sub_filter 'p="/web/"' 'p="$http_x_ingress_path/web/"';
-        sub_filter 'basename:"/web"' 'basename:"$http_x_ingress_path/web"';	
+        sub_filter 'basename:"/web"' 'basename:"$http_x_ingress_path/web"';
+        sub_filter 'n="/api/' 'n="$http_x_ingress_path/api/';
+        sub_filter 'concat("","/api/' 'concat("","$http_x_ingress_path/api/';
+        sub_filter 'path:"/api/' 'path:"$http_x_ingress_path/api/';
+        sub_filter 'path:"/v1/' 'path:"$http_x_ingress_path/v1/';
 	sub_filter_once off;
 
         proxy_pass http://backend;
