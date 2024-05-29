@@ -15,7 +15,7 @@ server {
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header Origin "";
         proxy_redirect '/' $http_x_ingress_path/;
-        sub_filter_types text/xml text/css text/javascript application/javascript text/html;
+        sub_filter_types text/xml text/css text/javascript application/javascript;
 	sub_filter 'href="/' 'href="$http_x_ingress_path/';
         sub_filter '<script src="/' '<script src="$http_x_ingress_path/';
         sub_filter '<script defer="defer" src="/' '<script defer="defer" src="$http_x_ingress_path/';
