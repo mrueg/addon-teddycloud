@@ -11,6 +11,7 @@
 - Minimize Docker Image
 
 ## Tested
+
 - Persistent storage of certificates, configs and data (stored under addons_config)
 - Tested with an actual box
 - Ingress in HA works
