@@ -7,11 +7,13 @@
 
 ## TODO
 
-- Persistent storage of certificates, configs and data (seems to work)
-- Testing with an actual box
 - Limiting privileges
-- Make Home Assistant Ingress work (works with ugly hack)
 - Minimize Docker Image
+
+## Tested
+- Persistent storage of certificates, configs and data (stored under addons_config)
+- Tested with an actual box
+- Ingress in HA works
 
 ## About TeddyCloud
 
