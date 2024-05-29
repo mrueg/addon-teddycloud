@@ -33,6 +33,7 @@ server {
         sub_filter 'concat("","/api/' 'concat("","$http_x_ingress_path/api/';
         sub_filter 'path:"/api/' 'path:"$http_x_ingress_path/api/';
         sub_filter 'path:"/v1/' 'path:"$http_x_ingress_path/v1/';
+	sub_filter "concat('', '/api" "concat('', '$http_x_ingress_path/api";
 	sub_filter_once off;
 
         proxy_pass http://backend;
