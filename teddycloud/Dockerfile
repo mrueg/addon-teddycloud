@@ -1,20 +1,20 @@
-ARG BUILD_FROM=ghcr.io/hassio-addons/base/amd64:15.0.9
+ARG BUILD_FROM=ghcr.io/hassio-addons/base/amd64:16.2.1
 # hadolint ignore=DL3006
-FROM ${BUILD_FROM} as buildenv
+FROM ${BUILD_FROM} AS buildenv
 
 # Set shell
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Setup base
 ARG BUILD_ARCH=amd64
-ARG TEDDYCLOUD_VERSION="v0.5.2"
+ARG TEDDYCLOUD_VERSION="v0.6.0"
 
 # Install necessary dependencies
 RUN apk --no-cache add \
-    gcc=13.2.1_git20231014-r0 \
-    protobuf-c-dev=1.4.1-r7 \
+    gcc=13.2.1_git20240309-r0 \
+    protobuf-c-dev=1.5.0-r0 \
     build-base=0.5-r3 \
-    git=2.43.4-r0 \
+    git=2.45.2-r0 \
     zip=3.0-r12
 
 WORKDIR /buildenv
@@ -34,8 +34,8 @@ EXPOSE 80 443
 
 # Install necessary runtime dependencies
 RUN apk --no-cache add \
-    ffmpeg=6.1.1-r0 \
-    nginx=1.24.0-r16 \
+    ffmpeg=6.1.1-r8 \
+    nginx=1.26.2-r0 \
     && update-ca-certificates \
     && mkdir -p /teddycloud/certs \
     && mkdir -p /teddycloud/config \
