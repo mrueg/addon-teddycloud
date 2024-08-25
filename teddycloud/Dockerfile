@@ -41,9 +41,9 @@ RUN apk --no-cache add \
     && mkdir -p /teddycloud/config \
     && mkdir -p /teddycloud/data/content/default \
     && mkdir -p /teddycloud/data/library \
-    && mkdir -p /teddycloud/data/firmware  \
-    && mkdir -p /teddycloud/data/www   \
-    && mkdir -p /teddycloud/data/cache
+    && mkdir -p /teddycloud/data/firmware \
+    && mkdir -p /teddycloud/data/www \
+    && mkdir -p /teddycloud/data/cache \
     && mkdir -p /tmp \
     && ln -s /config /etc/teddycloud
 
