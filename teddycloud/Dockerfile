@@ -30,7 +30,7 @@ RUN git clone https://github.com/toniebox-reverse-engineering/teddycloud /builde
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM} 
 
-EXPOSE 80 443
+EXPOSE 80 443 8443
 
 # Install necessary runtime dependencies
 RUN apk --no-cache add \

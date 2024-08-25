@@ -21,8 +21,10 @@ privileged:
 ports:
   80/tcp: 80
   443/tcp: 443
+  8443/tcp: 8443
 ports_description:
   80/tcp: "TeddyCloud Web Interface"
   443/tcp: "TeddyCloud API"
+  8443/tcp: "TeddyCloud Web Interface"
 map:
   - addon_config:rw
