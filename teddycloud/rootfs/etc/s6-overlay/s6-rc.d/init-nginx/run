@@ -12,3 +12,10 @@ bashio::var.json \
     | tempio \
         -template /etc/nginx/templates/ingress.gtpl \
         -out /etc/nginx/servers/ingress.conf
+
+# Generate upstream conf
+bashio::var.json \
+    port "^$(bashio::addon.port 80)" \
+    | tempio \
+        -template /etc/nginx/templates/upstream.conf.gtpl \
+        -out /etc/nginx/includes/upstream.conf
