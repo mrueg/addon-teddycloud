@@ -17,7 +17,9 @@ server {
         proxy_redirect '/' $http_x_ingress_path/;
         sub_filter_types text/xml text/css text/javascript application/javascript;
 	sub_filter 'href="/' 'href="$http_x_ingress_path/';
-        sub_filter '<script src="/' '<script src="$http_x_ingress_path/';
+        sub_filter '<script type="module" crossorigin src="/web' '<script type="module" crossorigin src="$http_x_ingress_path/web';
+        sub_filter '<link rel="stylesheet" crossorigin href="/web/' '<link rel="stylesheet" crossorigin href="$http_x_ingress_path/web/';
+	sub_filter '<script src="/' '<script src="$http_x_ingress_path/';
         sub_filter '<script defer="defer" src="/' '<script defer="defer" src="$http_x_ingress_path/';
 	sub_filter "top.location.href='" "top.location.href='$http_x_ingress_path";
 	sub_filter "fetch('/v1/" "fetch('$http_x_ingress_path/v1/";
