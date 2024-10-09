@@ -30,6 +30,7 @@ server {
         sub_filter 'apiGetTeddyCloudApiRaw("/api/' 'apiGetTeddyCloudApiRaw("$http_x_ingress_path/api/';
         sub_filter 'apiGetTeddyCloudApiRaw(`/api/' 'apiGetTeddyCloudApiRaw(`$http_x_ingress_path/api/';
         sub_filter 'apiPostTeddyCloudApiRaw(`/api/' 'apiPostTeddyCloudApiRaw(`$http_x_ingress_path/api/';
+        sub_filter 'loadPath:"/web/' 'loadPath:"$http_x_ingress_path/web/';	
 	sub_filter 'REACT_APP_TEDDYCLOUD_WEB_BASE:"/web"' 'REACT_APP_TEDDYCLOUD_WEB_BASE:"$http_x_ingress_path/web"';
         sub_filter 'PUBLIC_URL:"/web"' 'PUBLIC_URL:"$http_x_ingress_path/web"';
         sub_filter 'p="/web/"' 'p="$http_x_ingress_path/web/"';
