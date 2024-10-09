@@ -8,7 +8,7 @@ ingress: true
 ingress_port: 0
 ingress_stream: true
 panel_icon: mdi:teddy-bear
-image: ghcr.io/mrueg/addon-teddycloud/{arch}
+image: ghcr.io/mrueg/teddycloud/{arch}
 arch:
   - aarch64
   - amd64
