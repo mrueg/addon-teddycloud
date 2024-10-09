@@ -19,4 +19,4 @@ jobs:
       repository: "hassos-addons"
       repository_edge: "hassos-addons-edge"
     secrets:
-      DISPATCH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      DISPATCH_TOKEN: ${{ secrets.DISPATCH_TOKEN }}
