@@ -5,10 +5,14 @@
 
 ![Logo](./assets/teddycloud.svg)
 
+## How to use
+
+Currently, there's only an edge repository available [here](https://github.com/mrueg/hassos-addons-edge) that you can add to your home assistant.
+
 ## TODO
 
-- Limiting privileges
 - Minimize Docker Image
+- Fix Certificate Upload
 
 ## Tested
 
