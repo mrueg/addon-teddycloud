@@ -7,7 +7,7 @@
 
 ## How to use
 
-Currently, this is published in two repositories. A stable repository [here](https://github.com/mrueg/hassos-addons) and an  edge repository for unstable releases available [here](https://github.com/mrueg/hassos-addons-edge). You can add these to your home assistant installation under addons store.
+Currently, this is published in two repositories. A stable repository [here](https://github.com/mrueg/hassos-addons) and an edge repository for unstable releases available [here](https://github.com/mrueg/hassos-addons-edge). You can add these to your home assistant installation under addons store.
 
 ## TODO
 
