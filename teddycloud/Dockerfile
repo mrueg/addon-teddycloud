@@ -43,7 +43,7 @@ RUN apt-get update \
          ffmpeg=7:4.4.2-0ubuntu0.22.04.1  \
          curl=7.81.0-1ubuntu1.18 \
          ca-certificates=20240203~22.04.1 \
-         nginx=nginx 1.18.0-6ubuntu14.5 \
+         nginx=1.18.0-6ubuntu14.5 \
     && rm -rf /var/lib/apt/lists/* \
     && update-ca-certificates \
     && mkdir -p /teddycloud/certs \
