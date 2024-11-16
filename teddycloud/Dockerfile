@@ -34,8 +34,8 @@ EXPOSE 80 443 8443
 
 # Install necessary runtime dependencies
 RUN apk --no-cache add \
-    ffmpeg=6.1.1-r8 \
-    nginx=1.26.2-r0 \
+    ffmpeg=6.1.1-r10 \
+    nginx=1.26.2-r2 \
     && update-ca-certificates \
     && mkdir -p /teddycloud/certs \
     && mkdir -p /teddycloud/config \
