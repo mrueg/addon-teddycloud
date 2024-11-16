@@ -12,7 +12,13 @@ ARG TEDDYCLOUD_VERSION="v0.6.2"
 # Install necessary dependencies
 RUN apt-get update \
     && apt-get upgrade -qq \
-    && apt-get install -y --no-install-recommends gcc protobuf-c-compiler build-essential git zip curl
+    && apt-get install -y --no-install-recommends \
+         gcc=4:11.2.0-1ubuntu1 \
+         protobuf-c-compiler=1.3.3-1ubuntu2.1 \
+         build-essential=12.9ubuntu3 \
+         git=1:2.34.1-1ubuntu1.11 \
+         zip=3.0-12build2 \
+         curl=7.81.0-1ubuntu1.18
 
 WORKDIR /buildenv
 RUN git clone https://github.com/toniebox-reverse-engineering/teddycloud /buildenv && git checkout tc_${TEDDYCLOUD_VERSION} \
@@ -32,7 +38,11 @@ EXPOSE 80 443 8443
 # Install necessary runtime dependencies
 RUN apt-get update \ 
     && apt-get upgrade -qq \
-    && apt-get install -y --no-install-recommends libubsan1 ffmpeg curl ca-certificates \
+    && apt-get install -y --no-install-recommends \
+         libubsan1=12.3.0-1ubuntu1~22.04 \
+         ffmpeg=7:4.4.2-0ubuntu0.22.04.1  \
+         curl=7.81.0-1ubuntu1.18 \
+         ca-certificates=20240203~22.04.1 \
     && rm -rf /var/lib/apt/lists/* \
     && update-ca-certificates \
     && mkdir -p /teddycloud/certs \
