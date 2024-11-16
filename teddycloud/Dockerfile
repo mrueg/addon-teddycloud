@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.io/hassio-addons/base/amd64:16.3.6
+ARG BUILD_FROM=ghcr.io/hassio-addons/ubuntu-base/amd64:9.0.5
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM} AS buildenv
 
@@ -10,12 +10,9 @@ ARG BUILD_ARCH=amd64
 ARG TEDDYCLOUD_VERSION="v0.6.2"
 
 # Install necessary dependencies
-RUN apk --no-cache add \
-    gcc=13.2.1_git20240309-r0 \
-    protobuf-c-dev=1.5.0-r0 \
-    build-base=0.5-r3 \
-    git=2.45.2-r0 \
-    zip=3.0-r12
+RUN apt-get update \
+    && apt-get upgrade -qq \
+    && apt-get install -y --no-install-recommends gcc protobuf-c-compiler build-essential git zip curl
 
 WORKDIR /buildenv
 RUN git clone https://github.com/toniebox-reverse-engineering/teddycloud /buildenv && git checkout tc_${TEDDYCLOUD_VERSION} \
@@ -23,7 +20,7 @@ RUN git clone https://github.com/toniebox-reverse-engineering/teddycloud /builde
     && curl -f https://raw.githubusercontent.com/toniebox-reverse-engineering/tonies-json/release/tonieboxes.json -o /buildenv/contrib/config/tonieboxes.json || true \
     && git submodule init \
     && git submodule update \
-    && make zip NO_SANITIZERS=1 # No libsanitize support in alpine
+    && make zip
 
 #RUN make preinstall
 
@@ -33,9 +30,10 @@ FROM ${BUILD_FROM}
 EXPOSE 80 443 8443
 
 # Install necessary runtime dependencies
-RUN apk --no-cache add \
-    ffmpeg=6.1.1-r8 \
-    nginx=1.26.2-r0 \
+RUN apt-get update \ 
+    && apt-get upgrade -qq \
+    && apt-get install -y --no-install-recommends libubsan1 ffmpeg curl ca-certificates \
+    && rm -rf /var/lib/apt/lists/* \
     && update-ca-certificates \
     && mkdir -p /teddycloud/certs \
     && mkdir -p /teddycloud/config \
