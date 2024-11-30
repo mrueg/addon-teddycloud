@@ -18,7 +18,7 @@ RUN apt-get update \
          build-essential=12.9ubuntu3 \
          git=1:2.34.1-1ubuntu1.11 \
          zip=3.0-12build2 \
-         curl=7.81.0-1ubuntu1.18
+         curl=7.81.0-1ubuntu1.19
 
 WORKDIR /buildenv
 RUN git clone https://github.com/toniebox-reverse-engineering/teddycloud /buildenv && git checkout tc_${TEDDYCLOUD_VERSION} \
@@ -41,7 +41,7 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends \
          libubsan1=12.3.0-1ubuntu1~22.04 \
          ffmpeg=7:4.4.2-0ubuntu0.22.04.1  \
-         curl=7.81.0-1ubuntu1.18 \
+         curl=7.81.0-1ubuntu1.19 \
          ca-certificates=20240203~22.04.1 \
          nginx=1.18.0-6ubuntu14.5 \
     && rm -rf /var/lib/apt/lists/* \
