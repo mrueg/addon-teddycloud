@@ -41,7 +41,7 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends \
          libubsan1=12.3.0-1ubuntu1~22.04 \
          ffmpeg=7:4.4.2-0ubuntu0.22.04.1  \
-         curl=7.81.0-1ubuntu1.19 \
+         curl=7.81.0-1ubuntu1.20 \
          ca-certificates=20240203~22.04.1 \
          nginx=1.18.0-6ubuntu14.5 \
     && rm -rf /var/lib/apt/lists/* \
