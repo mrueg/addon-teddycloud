@@ -18,7 +18,7 @@ RUN apt-get update \
          build-essential=12.9ubuntu3 \
          git=1:2.34.1-1ubuntu1.11 \
          zip=3.0-12build2 \
-         curl=7.81.0-1ubuntu1.19
+         curl=7.81.0-1ubuntu1.20
 
 WORKDIR /buildenv
 RUN git clone https://github.com/toniebox-reverse-engineering/teddycloud /buildenv && git checkout tc_${TEDDYCLOUD_VERSION} \
