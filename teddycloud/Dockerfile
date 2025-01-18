@@ -16,7 +16,7 @@ RUN apt-get update \
          gcc=4:11.2.0-1ubuntu1 \
          protobuf-c-compiler=1.3.3-1ubuntu2.1 \
          build-essential=12.9ubuntu3 \
-         git=1:2.34.1-1ubuntu1.11 \
+         git=1:2.34.1-1ubuntu1.12 \
          zip=3.0-12build2 \
          curl=7.81.0-1ubuntu1.20
 
