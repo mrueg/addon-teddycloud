@@ -17,7 +17,6 @@ RUN apt-get update \
          protobuf-c-compiler=1.3.3-1ubuntu2.1 \
          build-essential=12.9ubuntu3 \
          git=1:2.34.1-1ubuntu1.12 \
-         zip=3.0-12build2 \
          curl=7.81.0-1ubuntu1.20
 
 WORKDIR /buildenv
@@ -26,7 +25,7 @@ RUN git clone https://github.com/toniebox-reverse-engineering/teddycloud /builde
     && curl -f https://raw.githubusercontent.com/toniebox-reverse-engineering/tonies-json/release/tonieboxes.json -o /buildenv/contrib/config/tonieboxes.json || true \
     && git submodule init \
     && git submodule update \
-    && make zip
+    && make preinstall
 
 #RUN make preinstall
 
@@ -61,7 +60,6 @@ COPY --from=buildenv /buildenv/install/pre/certs/ /teddycloud/certs/
 COPY --from=buildenv /buildenv/install/pre/data/www/ /teddycloud/data/www/
 COPY --from=buildenv /buildenv/install/pre/*.sh /usr/local/bin/
 COPY --from=buildenv /buildenv/install/pre/teddycloud /usr/local/bin/teddycloud
-COPY --from=buildenv /buildenv/install/zip/release.zip /tmp/teddycloud.zip
 
 # Copy root filesystem
 COPY rootfs /
