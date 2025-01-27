@@ -31,11 +31,21 @@ fi
 
 if [ -d /config/data/ ]; then
    bashio::log.info "Old /config/data path exists; migrating it over to new certs path"
-   mv /config/data/content/* /data/teddycloud/content/*
-   mv /config/data/library/* /data/teddycloud/library/*
-   mv /config/data/firmware/* /data/teddycloud/firmware/*
-   mv /config/data/cache/* /data/teddycloud/cache/*
-   mv /config/data/www/custom_img/* /data/teddycloud/custom_img/*
+   if [ -d /config/data/content ]; then
+     mv /config/data/content/* /data/teddycloud/content/
+   fi
+   if [ -d /config/data/library ]; then
+     mv /config/data/library/* /data/teddycloud/library/
+   fi
+   if [ -d /config/data/firmware ]; then
+     mv /config/data/firmware/* /data/teddycloud/firmware/
+   fi
+   if [ -d /config/data/cache ]; then
+     mv /config/data/cache/* /data/teddycloud/cache/
+   fi
+   if [ -d /config/data/www/custom_img ]; then
+     mv /config/data/www/custom_img/* /data/teddycloud/custom_img/
+   fi
    rm -rf /config/data
 fi
 
