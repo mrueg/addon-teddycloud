@@ -7,9 +7,37 @@
 
 bashio::log.info "Starting TeddyCloud..."
 
-if [ -z "$(ls -A /config)" ]; then
+mkdir -p /config/teddycloud
+if [ -z "$(ls -A /config/teddycloud/)" ]; then
    bashio::log.info "Config is empty, copying default config"
-   cp -R /teddycloud/* /config;
+   mkdir -p /config/teddycloud/certs /config/teddycloud/config
 fi
-cd /config || exit
+
+if [ -d /config/certs/ ]; then
+   bashio::log.info "Old /config/certs path exists; migrating it over to new certs path"
+   mv /config/certs/* /config/teddycloud/certs
+fi
+
+if [ -d /config/config/ ]; then
+   bashio::log.info "Old /config/config path exists; migrating it over to new config path"
+   mv /config/config /config/teddycloud/
+fi
+
+mkdir -p /data/teddycloud
+if [ -z "$(ls -A /data/teddycloud)" ]; then
+   bashio::log.info "Data store is empty; setting up new one"
+   mkdir -p /data/teddycloud/content /data/teddycloud/library /data/teddycloud/custom_img /data/teddycloud/firmware /data/teddycloud/cache
+fi
+
+if [ -d /config/data/ ]; then
+   bashio::log.info "Old /config/data path exists; migrating it over to new certs path"
+   mv /config/data/content/* /data/teddycloud/content/*
+   mv /config/data/library/* /data/teddycloud/library/*
+   mv /config/data/firmware/* /data/teddycloud/firmware/*
+   mv /config/data/cache/* /data/teddycloud/cache/*
+   mv /config/data/www/custom_img/* /data/teddycloud/custom_img/*
+   rm -rf /config/data
+fi
+
+cd /teddycloud || exit
 exec /usr/local/bin/teddycloud
