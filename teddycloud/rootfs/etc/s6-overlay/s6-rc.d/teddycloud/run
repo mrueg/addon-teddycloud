@@ -8,42 +8,42 @@
 bashio::log.info "Starting TeddyCloud..."
 
 mkdir -p /config/teddycloud
-if [ -z "$(ls -A /config/teddycloud/)" ]; then
-   bashio::log.info "Config is empty, copying default config"
+if [[ -z "$(ls -A /config/teddycloud/)" ]]; then
+   bashio::log.info "Config is empty, creating default config"
    mkdir -p /config/teddycloud/certs /config/teddycloud/config
 fi
 
-if [ -d /config/certs/ ]; then
+if [[ -d /config/certs/ ]]; then
    bashio::log.info "Old /config/certs path exists; migrating it over to new certs path"
    mv /config/certs /config/teddycloud/certs
 fi
 
-if [ -d /config/config/ ]; then
+if [[ -d /config/config/ ]]; then
    bashio::log.info "Old /config/config path exists; migrating it over to new config path"
    mv /config/config /config/teddycloud/
 fi
 
 mkdir -p /data/teddycloud
-if [ -z "$(ls -A /data/teddycloud)" ]; then
-   bashio::log.info "Data store is empty; setting up new one"
+if [[ -z "$(ls -A /data/teddycloud)" ]]; then
+   bashio::log.info "Data store is empty; creating a new one"
    mkdir -p /data/teddycloud/content /data/teddycloud/library /data/teddycloud/custom_img /data/teddycloud/firmware /data/teddycloud/cache
 fi
 
-if [ -d /config/data/ ]; then
+if [[ -d /config/data/ ]]; then
    bashio::log.info "Old /config/data path exists; migrating it over to new data path"
-   if [ -d /config/data/content && -n "$(ls -A /config/data/content)" ]; then
+   if [[ -d /config/data/content && -n "$(ls -A /config/data/content)" ]]; then
      mv /config/data/content/* /data/teddycloud/content/
    fi
-   if [ -d /config/data/library && -n "$(ls -A /config/data/library)"]; then
+   if [[ -d /config/data/library && -n "$(ls -A /config/data/library)" ]]; then
      mv /config/data/library/* /data/teddycloud/library/
    fi
-   if [ -d /config/data/firmware && -n "$(ls -A /config/data/firmware)" ]; then
+   if [[ -d /config/data/firmware && -n "$(ls -A /config/data/firmware)" ]]; then
      mv /config/data/firmware/* /data/teddycloud/firmware/
    fi
-   if [ -d /config/data/cache && -n "$(ls -A /config/data/cache)" ]; then
+   if [[ -d /config/data/cache && -n "$(ls -A /config/data/cache)" ]]; then
      mv /config/data/cache/* /data/teddycloud/cache/
    fi
-   if [ -d /config/data/www/custom_img && -n "$(ls -A /config/data/www/custom_img)" ]; then
+   if [[ -d /config/data/www/custom_img && -n "$(ls -A /config/data/www/custom_img)" ]]; then
      mv /config/data/www/custom_img/* /data/teddycloud/custom_img/
    fi
    rm -rf /config/data
