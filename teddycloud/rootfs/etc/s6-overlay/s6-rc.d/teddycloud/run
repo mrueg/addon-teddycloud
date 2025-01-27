@@ -30,20 +30,20 @@ if [ -z "$(ls -A /data/teddycloud)" ]; then
 fi
 
 if [ -d /config/data/ ]; then
-   bashio::log.info "Old /config/data path exists; migrating it over to new certs path"
-   if [ -d /config/data/content ]; then
+   bashio::log.info "Old /config/data path exists; migrating it over to new data path"
+   if [ -d /config/data/content && -n "$(ls -A /config/data/content)" ]; then
      mv /config/data/content/* /data/teddycloud/content/
    fi
-   if [ -d /config/data/library ]; then
+   if [ -d /config/data/library && -n "$(ls -A /config/data/library)"]; then
      mv /config/data/library/* /data/teddycloud/library/
    fi
-   if [ -d /config/data/firmware ]; then
+   if [ -d /config/data/firmware && -n "$(ls -A /config/data/firmware)" ]; then
      mv /config/data/firmware/* /data/teddycloud/firmware/
    fi
-   if [ -d /config/data/cache ]; then
+   if [ -d /config/data/cache && -n "$(ls -A /config/data/cache)" ]; then
      mv /config/data/cache/* /data/teddycloud/cache/
    fi
-   if [ -d /config/data/www/custom_img ]; then
+   if [ -d /config/data/www/custom_img && -n "$(ls -A /config/data/www/custom_img)" ]; then
      mv /config/data/www/custom_img/* /data/teddycloud/custom_img/
    fi
    rm -rf /config/data
