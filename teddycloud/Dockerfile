@@ -27,12 +27,15 @@ RUN git clone https://github.com/toniebox-reverse-engineering/teddycloud /builde
     && git submodule update \
     && make preinstall
 
-#RUN make preinstall
-
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM} 
 
 EXPOSE 80 443 8443
+
+# Copy files from the build environment
+COPY --from=buildenv /buildenv/install/pre/data/www/ /teddycloud/data/www/
+COPY --from=buildenv /buildenv/install/pre/*.sh /usr/local/bin/
+COPY --from=buildenv /buildenv/install/pre/teddycloud /usr/local/bin/teddycloud
 
 # Install necessary runtime dependencies
 RUN apt-get update \ 
@@ -45,21 +48,15 @@ RUN apt-get update \
          nginx=1.18.0-6ubuntu14.5 \
     && rm -rf /var/lib/apt/lists/* \
     && update-ca-certificates \
-    && mkdir -p /teddycloud/certs \
-    && mkdir -p /teddycloud/config \
-    && mkdir -p /teddycloud/data/content/default \
-    && mkdir -p /teddycloud/data/library \
-    && mkdir -p /teddycloud/data/firmware \
-    && mkdir -p /teddycloud/data/www \
-    && mkdir -p /teddycloud/data/cache \
-    && mkdir -p /tmp \
-    && ln -s /config /etc/teddycloud
+    && mkdir -p /teddycloud/data/ /teddycloud/data/www/ \
+    && ln -s /data/teddycloud/content /teddycloud/data/content \
+    && ln -s /data/teddycloud/library /teddycloud/data/library \
+    && ln -s /data/teddycloud/custom_img /teddycloud/data/www/custom_img \
+    && ln -s /data/teddycloud/firmware /teddycloud/data/firmware \
+    && ln -s /data/teddycloud/cache /teddycloud/data/cache \
+    && ln -s /config/teddycloud/certs /teddycloud/certs \
+    && ln -s /config/teddycloud/config /teddycloud/config
 
-# Copy files from the build environment
-COPY --from=buildenv /buildenv/install/pre/certs/ /teddycloud/certs/
-COPY --from=buildenv /buildenv/install/pre/data/www/ /teddycloud/data/www/
-COPY --from=buildenv /buildenv/install/pre/*.sh /usr/local/bin/
-COPY --from=buildenv /buildenv/install/pre/teddycloud /usr/local/bin/teddycloud
 
 # Copy root filesystem
 COPY rootfs /
