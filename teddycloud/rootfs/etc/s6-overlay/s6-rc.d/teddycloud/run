@@ -15,7 +15,7 @@ fi
 
 if [ -d /config/certs/ ]; then
    bashio::log.info "Old /config/certs path exists; migrating it over to new certs path"
-   mv /config/certs/* /config/teddycloud/certs
+   mv /config/certs /config/teddycloud/certs
 fi
 
 if [ -d /config/config/ ]; then
