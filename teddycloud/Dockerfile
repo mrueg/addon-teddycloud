@@ -7,7 +7,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Setup base
 ARG BUILD_ARCH=amd64
-ARG TEDDYCLOUD_VERSION="v0.6.3"
+ARG TEDDYCLOUD_VERSION="v0.6.4"
 
 # Install necessary dependencies
 RUN apt-get update \
@@ -45,7 +45,7 @@ RUN apt-get update \
          ffmpeg=7:4.4.2-0ubuntu0.22.04.1  \
          curl=7.81.0-1ubuntu1.20 \
          ca-certificates=20240203~22.04.1 \
-         nginx=1.18.0-6ubuntu14.5 \
+         nginx=1.18.0-6ubuntu14.6 \
     && rm -rf /var/lib/apt/lists/* \
     && update-ca-certificates \
     && mkdir -p /teddycloud/data/ /teddycloud/data/www/ \
