@@ -10,7 +10,7 @@ bashio::log.info "Starting TeddyCloud..."
 mkdir -p /config/teddycloud
 if [[ -z "$(ls -A /config/teddycloud/)" ]]; then
    bashio::log.info "Config is empty, creating default config"
-   mkdir -p /config/teddycloud/certs mkdir -p /config/teddycloud/certs/server /config/teddycloud/config
+   mkdir -p /config/teddycloud/certs /config/teddycloud/certs/server /config/teddycloud/config
 fi
 
 if [[ -d /config/certs/ ]]; then
