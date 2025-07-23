@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.io/hassio-addons/ubuntu-base/amd64:10.0.5
+ARG BUILD_FROM=ghcr.io/hassio-addons/ubuntu-base/amd64:10.0.6
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM} AS buildenv
 
@@ -7,7 +7,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Setup base
 ARG BUILD_ARCH=amd64
-ARG TEDDYCLOUD_VERSION="v0.6.3"
+ARG TEDDYCLOUD_VERSION="v0.6.4"
 
 # Install necessary dependencies
 RUN apt-get update \
