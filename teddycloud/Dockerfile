@@ -16,7 +16,7 @@ RUN apt-get update \
          gcc=4:13.2.0-7ubuntu1 \
 	 protobuf-c-compiler=1.4.1-1ubuntu4 \
          build-essential=12.10ubuntu1 \
-         git=1:2.43.0-1ubuntu7.2 \
+         git=1:2.43.0-1ubuntu7.3 \
          curl=8.5.0-2ubuntu10.6
 
 WORKDIR /buildenv
