@@ -51,4 +51,8 @@ if [[ -d /config/data/ ]]; then
 fi
 
 cd /teddycloud || exit
+
+# Disable address randomization
+setarch $(uname -m) -R /usr/local/bin/teddycloud
+
 exec /usr/local/bin/teddycloud
