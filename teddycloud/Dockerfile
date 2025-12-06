@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.io/hassio-addons/ubuntu-base/amd64:10.0.10
+ARG BUILD_FROM=ghcr.io/hassio-addons/ubuntu-base/amd64:11.0.0
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM} AS buildenv
 
@@ -7,7 +7,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Setup base
 ARG BUILD_ARCH=amd64
-ARG TEDDYCLOUD_VERSION="v0.6.4"
+ARG TEDDYCLOUD_VERSION="v0.6.5"
 
 # Install necessary dependencies
 RUN apt-get update \
@@ -25,7 +25,7 @@ RUN git clone https://github.com/toniebox-reverse-engineering/teddycloud /builde
     && curl -f https://raw.githubusercontent.com/toniebox-reverse-engineering/tonies-json/release/tonieboxes.json -o /buildenv/contrib/config/tonieboxes.json || true \
     && git submodule init \
     && git submodule update \
-    && make preinstall
+    && make preinstall NOSANITIZERS=2
 
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM} 
@@ -52,6 +52,7 @@ RUN apt-get update \
     && ln -s /data/teddycloud/content /teddycloud/data/content \
     && ln -s /data/teddycloud/library /teddycloud/data/library \
     && ln -s /data/teddycloud/custom_img /teddycloud/data/www/custom_img \
+    && ln -s /data/teddycloud/plugins /teddycloud/data/www/plugins \
     && ln -s /data/teddycloud/firmware /teddycloud/data/firmware \
     && ln -s /data/teddycloud/cache /teddycloud/data/cache \
     && ln -s /config/teddycloud/certs /teddycloud/certs \
