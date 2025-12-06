@@ -25,7 +25,7 @@ RUN git clone https://github.com/toniebox-reverse-engineering/teddycloud /builde
     && curl -f https://raw.githubusercontent.com/toniebox-reverse-engineering/tonies-json/release/tonieboxes.json -o /buildenv/contrib/config/tonieboxes.json || true \
     && git submodule init \
     && git submodule update \
-    && make preinstall NOSANITIZERS=2
+    && make preinstall NO_SANITIZERS=2
 
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM} 
