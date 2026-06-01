@@ -17,7 +17,7 @@ RUN apt-get update \
 	 protobuf-c-compiler=1.4.1-1ubuntu4 \
          build-essential=12.10ubuntu1 \
          git=1:2.43.0-1ubuntu7.3 \
-         curl=8.5.0-2ubuntu10.6
+         curl=8.5.0-2ubuntu10.9
 
 WORKDIR /buildenv
 RUN git clone https://github.com/toniebox-reverse-engineering/teddycloud /buildenv && git checkout tc_${TEDDYCLOUD_VERSION} \
