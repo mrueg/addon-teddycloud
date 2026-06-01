@@ -23,4 +23,5 @@ ports_description:
   8443/tcp: "TeddyCloud Web Interface (https)"
 map:
   - addon_config:rw
+  - media:rw
   - share:rw
