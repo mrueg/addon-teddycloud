@@ -12,7 +12,7 @@ arch:
   - aarch64
   - amd64
 init: false
-hassio_api: true
+watchdog: "http://[HOST]:[PORT:80]/web/"
 ports:
   80/tcp: null
   443/tcp: 443
