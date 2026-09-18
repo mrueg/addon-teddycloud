@@ -62,6 +62,10 @@ RUN apt-get update \
 # Copy root filesystem
 COPY rootfs /
 
+# Report container health from the web UI so the Supervisor watchdog can restart a hung TeddyCloud
+HEALTHCHECK --interval=30s --timeout=10s --start-period=120s --retries=3 \
+    CMD curl -fsS -o /dev/null http://127.0.0.1:80/web/ || exit 1
+
 # Build arguments
 ARG BUILD_ARCH
 ARG BUILD_DATE
