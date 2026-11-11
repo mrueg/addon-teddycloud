@@ -7,26 +7,6 @@
 
 bashio::log.info "Starting TeddyCloud..."
 
-# Move the pre-2025 layout (/config/certs, /config/config) into /config/teddycloud.
-# This must run before the defaults below are created. A target that exists
-# but holds no files (e.g. left behind by an earlier failed migration) is
-# replaced; a target with files is kept and the old path is left alone.
-migrate_dir() {
-   local src="${1}" dst="${2}"
-   [[ -d "${src}" ]] || return 0
-   if [[ -d "${dst}" && -n "$(find "${dst}" -type f -print -quit)" ]]; then
-      bashio::log.warning "Both ${src} and ${dst} exist; keeping ${dst}, please clean up ${src} manually"
-      return 0
-   fi
-   bashio::log.info "Old ${src} path exists; migrating it over to ${dst}"
-   rm -rf "${dst}"
-   mv "${src}" "${dst}"
-}
-
-mkdir -p /config/teddycloud
-migrate_dir /config/certs /config/teddycloud/certs
-migrate_dir /config/config /config/teddycloud/config
-
 # Create the certs and config directories on every start (as upstream does),
 # so the symlinks in /teddycloud never dangle on existing installs.
 mkdir -p /config/teddycloud/certs/server /config/teddycloud/certs/server_tb2 \
@@ -36,27 +16,6 @@ mkdir -p /config/teddycloud/certs/server /config/teddycloud/certs/server_tb2 \
 # versions (and the cache excluded from backups) exist on existing installs too.
 mkdir -p /data/teddycloud/content /data/teddycloud/library /data/teddycloud/custom_img \
          /data/teddycloud/plugins /data/teddycloud/firmware /data/teddycloud/cache
-
-if [[ -d /config/data/ ]]; then
-   bashio::log.info "Old /config/data path exists; migrating it over to new data path"
-   if [[ -d /config/data/content && -n "$(ls -A /config/data/content)" ]]; then
-     mv /config/data/content/* /data/teddycloud/content/
-   fi
-   if [[ -d /config/data/library && -n "$(ls -A /config/data/library)" ]]; then
-     mv /config/data/library/* /data/teddycloud/library/
-   fi
-   if [[ -d /config/data/firmware && -n "$(ls -A /config/data/firmware)" ]]; then
-     mv /config/data/firmware/* /data/teddycloud/firmware/
-   fi
-   if [[ -d /config/data/cache && -n "$(ls -A /config/data/cache)" ]]; then
-     mv /config/data/cache/* /data/teddycloud/cache/
-   fi
-   if [[ -d /config/data/www/custom_img && -n "$(ls -A /config/data/www/custom_img)" ]]; then
-     mv /config/data/www/custom_img/* /data/teddycloud/custom_img/
-   fi
-   rm -rf /config/data
-   bashio::log.info "Migration successful. Deleted old /config/data path"
-fi
 
 cd /teddycloud || exit
 
