@@ -16,8 +16,8 @@ RUN apt-get update \
          gcc=4:13.2.0-7ubuntu1 \
 	 protobuf-c-compiler=1.4.1-1ubuntu4 \
          build-essential=12.10ubuntu1 \
-         git=1:2.43.0-1ubuntu7.3 \
-         curl=8.5.0-2ubuntu10.13
+         git=1:2.43.0-1ubuntu7.4 \
+         curl=8.5.0-2ubuntu10.16
 
 WORKDIR /buildenv
 RUN git clone https://github.com/toniebox-reverse-engineering/teddycloud /buildenv && git checkout tc_${TEDDYCLOUD_VERSION} \
@@ -43,9 +43,9 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends \
          libubsan1=14.2.0-4ubuntu2~24.04.1 \
          ffmpeg=7:6.1.1-3ubuntu5  \
-         curl=8.5.0-2ubuntu10.13 \
-         ca-certificates=20260601~24.04.1 \
-         nginx=1.24.0-2ubuntu7.18 \
+         curl=8.5.0-2ubuntu10.16 \
+         ca-certificates=20260816ubuntu0.24.04.2 \
+         nginx=1.24.0-2ubuntu7.19 \
     && rm -rf /var/lib/apt/lists/* \
     && update-ca-certificates \
     && mkdir -p /teddycloud/data/ /teddycloud/data/www/ \
