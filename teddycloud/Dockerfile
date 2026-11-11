@@ -7,7 +7,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Setup base
 ARG BUILD_ARCH=amd64
-ARG TEDDYCLOUD_VERSION="v0.7.0"
+ARG TEDDYCLOUD_VERSION="v0.7.1"
 
 # Install necessary dependencies
 RUN apt-get update \
