@@ -42,9 +42,9 @@
     {
       "matchDatasources": ["deb"],
       "registryUrls": [
-        "https://archive.ubuntu.com/ubuntu?suite=noble&components=main,universe&binaryArch=amd64",
-        "https://archive.ubuntu.com/ubuntu?suite=noble-updates&components=main,universe&binaryArch=amd64",
-        "https://security.ubuntu.com/ubuntu?suite=noble-security&components=main,universe&binaryArch=amd64"
+        "https://archive.ubuntu.com/ubuntu?suite=resolute&components=main,universe&binaryArch=amd64",
+        "https://archive.ubuntu.com/ubuntu?suite=resolute-updates&components=main,universe&binaryArch=amd64",
+        "https://security.ubuntu.com/ubuntu?suite=resolute-security&components=main,universe&binaryArch=amd64"
       ],
       "automerge": true
     },
