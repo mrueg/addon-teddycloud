@@ -7,20 +7,29 @@
 
 bashio::log.info "Starting TeddyCloud..."
 
+# Move the pre-2025 layout (/config/certs, /config/config) into /config/teddycloud.
+# This must run before the defaults below are created. A target that exists
+# but holds no files (e.g. left behind by an earlier failed migration) is
+# replaced; a target with files is kept and the old path is left alone.
+migrate_dir() {
+   local src="${1}" dst="${2}"
+   [[ -d "${src}" ]] || return 0
+   if [[ -d "${dst}" && -n "$(find "${dst}" -type f -print -quit)" ]]; then
+      bashio::log.warning "Both ${src} and ${dst} exist; keeping ${dst}, please clean up ${src} manually"
+      return 0
+   fi
+   bashio::log.info "Old ${src} path exists; migrating it over to ${dst}"
+   rm -rf "${dst}"
+   mv "${src}" "${dst}"
+}
+
 mkdir -p /config/teddycloud
-if [[ -z "$(ls -A /config/teddycloud/)" ]]; then
+migrate_dir /config/certs /config/teddycloud/certs
+migrate_dir /config/config /config/teddycloud/config
+
+if [[ ! -d /config/teddycloud/certs && ! -d /config/teddycloud/config ]]; then
    bashio::log.info "Config is empty, creating default config"
    mkdir -p /config/teddycloud/certs /config/teddycloud/certs/server /config/teddycloud/config
-fi
-
-if [[ -d /config/certs/ ]]; then
-   bashio::log.info "Old /config/certs path exists; migrating it over to new certs path"
-   mv /config/certs /config/teddycloud/
-fi
-
-if [[ -d /config/config/ ]]; then
-   bashio::log.info "Old /config/config path exists; migrating it over to new config path"
-   mv /config/config /config/teddycloud/
 fi
 
 # Create the data directories on every start, so directories added in newer
