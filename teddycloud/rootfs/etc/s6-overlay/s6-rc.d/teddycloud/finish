@@ -8,13 +8,19 @@ readonly exit_code_container
 readonly exit_code_service="${1}"
 readonly exit_code_signal="${2}"
 readonly service="teddycloud"
+# TeddyCloud exits with -2 (254) when a restart is requested from the web UI
+readonly exit_code_restart=254
 
 bashio::log.info \
   "Service ${service} exited with code ${exit_code_service}" \
   "(by signal ${exit_code_signal})"
 
+# TeddyCloud asked to be restarted, let S6 supervision restart it.
+if [[ "${exit_code_service}" -eq "${exit_code_restart}" ]]; then
+  bashio::log.info "Service ${service} restart requested, restarting..."
+
 # Received a signal
-if [[ "${exit_code_service}" -eq 256 ]]; then
+elif [[ "${exit_code_service}" -eq 256 ]]; then
 
   # The signal might be a result of another service crashing. Only
   # overwrite the container exit code if it is not already set.
