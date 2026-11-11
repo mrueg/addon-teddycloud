@@ -27,10 +27,10 @@ mkdir -p /config/teddycloud
 migrate_dir /config/certs /config/teddycloud/certs
 migrate_dir /config/config /config/teddycloud/config
 
-if [[ ! -d /config/teddycloud/certs && ! -d /config/teddycloud/config ]]; then
-   bashio::log.info "Config is empty, creating default config"
-   mkdir -p /config/teddycloud/certs /config/teddycloud/certs/server /config/teddycloud/config
-fi
+# Create the certs and config directories on every start (as upstream does),
+# so the symlinks in /teddycloud never dangle on existing installs.
+mkdir -p /config/teddycloud/certs/server /config/teddycloud/certs/server_tb2 \
+         /config/teddycloud/certs/client /config/teddycloud/config
 
 # Create the data directories on every start, so directories added in newer
 # versions (and the cache excluded from backups) exist on existing installs too.
