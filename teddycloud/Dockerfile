@@ -14,7 +14,7 @@ RUN apt-get update \
     && apt-get upgrade -qq \
     && apt-get install -y --no-install-recommends \
          gcc=4:13.2.0-7ubuntu1 \
-	 protobuf-c-compiler=1.4.1-1ubuntu4 \
+         protobuf-c-compiler=1.4.1-1ubuntu4 \
          build-essential=12.10ubuntu1 \
          git=1:2.43.0-1ubuntu7.4 \
          curl=8.5.0-2ubuntu10.16
@@ -28,7 +28,7 @@ RUN git clone https://github.com/toniebox-reverse-engineering/teddycloud /builde
     && make preinstall NO_SANITIZERS=2
 
 # hadolint ignore=DL3006
-FROM ${BUILD_FROM} 
+FROM ${BUILD_FROM}
 
 EXPOSE 80 443 8443
 
@@ -38,7 +38,7 @@ COPY --from=buildenv /buildenv/install/pre/*.sh /usr/local/bin/
 COPY --from=buildenv /buildenv/install/pre/teddycloud /usr/local/bin/teddycloud
 
 # Install necessary runtime dependencies
-RUN apt-get update \ 
+RUN apt-get update \
     && apt-get upgrade -qq \
     && apt-get install -y --no-install-recommends \
          libubsan1=14.2.0-4ubuntu2~24.04.1 \
@@ -86,7 +86,7 @@ LABEL \
     org.opencontainers.image.title="${BUILD_NAME}" \
     org.opencontainers.image.description="${BUILD_DESCRIPTION}" \
     org.opencontainers.image.vendor="Home Assistant Community Add-ons" \
-    org.opencontainers.image.authors="Manuel Rueger <manuel@rueg.eu>>" \
+    org.opencontainers.image.authors="Manuel Rueger <manuel@rueg.eu>" \
     org.opencontainers.image.licenses="MIT" \
     org.opencontainers.image.url="https://addons.community" \
     org.opencontainers.image.source="https://github.com/${BUILD_REPOSITORY}" \
