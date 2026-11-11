@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.io/hassio-addons/ubuntu-base/amd64:11.0.0
+ARG BUILD_FROM=ghcr.io/hassio-addons/ubuntu-base/amd64:12.0.1
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM} AS buildenv
 
@@ -13,11 +13,11 @@ ARG TEDDYCLOUD_VERSION="v0.7.1"
 RUN apt-get update \
     && apt-get upgrade -qq \
     && apt-get install -y --no-install-recommends \
-         gcc=4:13.2.0-7ubuntu1 \
-         protobuf-c-compiler=1.4.1-1ubuntu4 \
-         build-essential=12.10ubuntu1 \
-         git=1:2.43.0-1ubuntu7.4 \
-         curl=8.5.0-2ubuntu10.16
+         gcc=4:15.2.0-5ubuntu1 \
+         protobuf-c-compiler=1.5.1-1ubuntu2 \
+         build-essential=12.12ubuntu2.26.04.2 \
+         git=1:2.53.0-1ubuntu1.1 \
+         curl=8.18.0-1ubuntu2.8
 
 WORKDIR /buildenv
 RUN git clone https://github.com/toniebox-reverse-engineering/teddycloud /buildenv && git checkout tc_${TEDDYCLOUD_VERSION} \
@@ -41,11 +41,11 @@ COPY --from=buildenv /buildenv/install/pre/teddycloud /usr/local/bin/teddycloud
 RUN apt-get update \
     && apt-get upgrade -qq \
     && apt-get install -y --no-install-recommends \
-         libubsan1=14.2.0-4ubuntu2~24.04.1 \
-         ffmpeg=7:6.1.1-3ubuntu5  \
-         curl=8.5.0-2ubuntu10.16 \
-         ca-certificates=20260816ubuntu0.24.04.2 \
-         nginx=1.24.0-2ubuntu7.19 \
+         libubsan1=16-20260322-1ubuntu1 \
+         ffmpeg=7:8.0.1-3ubuntu2  \
+         curl=8.18.0-1ubuntu2.8 \
+         ca-certificates=20260816ubuntu0.26.04.2 \
+         nginx=1.28.3-2ubuntu1.12 \
     && rm -rf /var/lib/apt/lists/* \
     && update-ca-certificates \
     && mkdir -p /teddycloud/data/ /teddycloud/data/www/ \
