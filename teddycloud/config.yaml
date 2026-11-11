@@ -6,6 +6,7 @@ description: An alternative server for your Toniebox
 url: https://github.com/mrueg/addon-teddycloud
 ingress: true
 ingress_stream: true
+ingress_entry: web/
 panel_icon: mdi:teddy-bear
 image: ghcr.io/mrueg/teddycloud/{arch}
 arch:
