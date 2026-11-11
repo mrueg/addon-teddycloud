@@ -5,38 +5,47 @@
   "labels": ["dependencies", "no-stale"],
   "commitMessagePrefix": "⬆️",
   "commitMessageTopic": "{{depName}}",
-  "regexManagers": [
+  "customManagers": [
     {
-      "fileMatch": ["/Dockerfile$", "/build.yaml$"],
+      "customType": "regex",
+      "managerFilePatterns": ["//Dockerfile$/", "//build.yaml$/"],
       "matchStringsStrategy": "any",
       "matchStrings": [
         "ARG BUILD_FROM=(?<depName>.*?):(?<currentValue>.*?)\\s+",
-        "(aarch64|amd64|armhf|armv7|i386):\\s[\"']?(?<depName>.*?):(?<currentValue>.*?)[\"']?\\s"
+        "(aarch64|amd64):\\s[\"']?(?<depName>.*?):(?<currentValue>.*?)[\"']?\\s"
       ],
       "datasourceTemplate": "docker"
     },
     {
-      "fileMatch": ["/Dockerfile$"],
+      "customType": "regex",
+      "managerFilePatterns": ["//Dockerfile$/"],
       "matchStringsStrategy": "any",
       "matchStrings": [
-        "\\s\\s(?<package>[a-z0-9][a-z0-9-_]+)=(?<currentValue>[a-z0-9-_.]+)\\s+"
+        "\\s\\s(?<package>[a-z0-9][a-z0-9-]+)=(?<currentValue>[a-z0-9-:_+~.]+)\\s+"
       ],
-      "versioningTemplate": "loose",
-      "datasourceTemplate": "repology",
-      "depNameTemplate": "alpine_3_19/{{package}}"
+      "versioningTemplate": "deb",
+      "datasourceTemplate": "deb",
+      "depNameTemplate": "{{{package}}}"
     },
     {
-      "fileMatch": ["/Dockerfile$"],
+      "customType": "regex",
+      "managerFilePatterns": ["//Dockerfile$/"],
       "matchStrings": [
         "ARG TEDDYCLOUD_VERSION=[\"']?(?<currentValue>.+?)[\"']?\\s+"
       ],
       "datasourceTemplate": "github-releases",
-      "depNameTemplate": "toniebox-reverse-engineering/teddycloud"
+      "depNameTemplate": "toniebox-reverse-engineering/teddycloud",
+      "extractVersionTemplate": "^tc_(?<version>v.+)$"
     }
   ],
   "packageRules": [
     {
-      "matchDatasources": ["repology"],
+      "matchDatasources": ["deb"],
+      "registryUrls": [
+        "https://archive.ubuntu.com/ubuntu?suite=noble&components=main,universe&binaryArch=amd64",
+        "https://archive.ubuntu.com/ubuntu?suite=noble-updates&components=main,universe&binaryArch=amd64",
+        "https://security.ubuntu.com/ubuntu?suite=noble-security&components=main,universe&binaryArch=amd64"
+      ],
       "automerge": true
     },
     {
