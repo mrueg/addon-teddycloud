@@ -23,11 +23,10 @@ if [[ -d /config/config/ ]]; then
    mv /config/config /config/teddycloud/
 fi
 
-mkdir -p /data/teddycloud
-if [[ -z "$(ls -A /data/teddycloud)" ]]; then
-   bashio::log.info "Data store is empty; creating a new one"
-   mkdir -p /data/teddycloud/content /data/teddycloud/library /data/teddycloud/custom_img /data/teddycloud/firmware /data/teddycloud/cache
-fi
+# Create the data directories on every start, so directories added in newer
+# versions (and the cache excluded from backups) exist on existing installs too.
+mkdir -p /data/teddycloud/content /data/teddycloud/library /data/teddycloud/custom_img \
+         /data/teddycloud/plugins /data/teddycloud/firmware /data/teddycloud/cache
 
 if [[ -d /config/data/ ]]; then
    bashio::log.info "Old /config/data path exists; migrating it over to new data path"
